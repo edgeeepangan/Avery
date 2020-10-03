@@ -12,7 +12,6 @@
         <item>Equipment</item>
         <item>Home Expense</item>
         <item>Entertainment</item>
-        <item>Miscellaneous</item>
     </string-array>
     <string-array name="inc_choice"> <!-- choices when income is chosen on the first spinner -->
         <item>For/From...</item> <!-- default text to be implemented in the .kt file -->
@@ -21,7 +20,6 @@
         <item>Bonus</item>
         <item>Loan</item>
         <item>Allowance</item>
-        <item>Miscellaneous</item>
     </string-array>
     <string name="edit_message">Input Amount...</string>
     <string name="button_send">Confirm</string>
