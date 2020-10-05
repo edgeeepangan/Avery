@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.absoluteValue
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,37 +14,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         val int = getIntent()
         val grandTotal = findViewById<TextView>(R.id.total)
         val total = int.getStringExtra("total")
         grandTotal.setText(total)
 
+        val food = findViewById<TextView>(R.id.fod_val)
+        val eqp = findViewById<TextView>(R.id.eqp_val)
+        val sal = findViewById<TextView>(R.id.sal_val)
+
+
+        if (int.getStringExtra("fSub") != null) {
+            val fTotal = (int.getStringExtra("fSub").toDouble() + food.toString().toDouble()).toString()
+            food.setText(fTotal)
+        } else if (int.getStringExtra("eSub") != null) {
+            val eTotal = (int.getStringExtra("eSub").toDouble() + eqp.toString().toDouble()).toString()
+            eqp.setText(eTotal)
+        } else if (int.getStringExtra("sAdd") != null) {
+            val sTotal = (int.getStringExtra("sAdd").toDouble() + sal.toString().toDouble()).toString()
+            sal.setText(sTotal)
+        }
+        /*To be implemented: creating different values daily for each expense/income*/
+
         val exp = findViewById<TextView>(R.id.exp_val)
-        val expT = int.getStringExtra("fSub").toInt()+int.getStringExtra("sSub").toInt()+int.getStringExtra("eSub").toInt()+
-                int.getStringExtra("hSub").toInt()+int.getStringExtra("enSub").toInt()
+        val expT = (food.toString() + eqp.toString()).toDouble().absoluteValue
         exp.setText(expT.toString())
 
-
-        val inc = findViewById<TextView>(R.id.inc_val)
-        val incT = int.getStringExtra("sAdd").toInt()+int.getStringExtra("pAdd").toInt()+int.getStringExtra("bAdd").toInt()+
-                int.getStringExtra("lAdd").toInt()+int.getStringExtra("aAdd").toInt()
+        val inc = findViewById<TextView>(R.id.exp_val)
+        val incT = sal.toString().toDouble().absoluteValue /* to be implemented: add other income*/
         inc.setText(incT.toString())
-
-
-        val food = findViewById<TextView>(R.id.fod_val)
-        val fTotal = (int.getStringExtra("fSub").toDouble() + food.toString().toDouble()).toString()
-        food.setText("-" + fTotal)
-
-        val eqp = findViewById<TextView>(R.id.eqp_val)
-        val eTotal = (int.getStringExtra("eSub").toDouble() + eqp.toString().toDouble()).toString()
-        eqp.setText("-" + eTotal)
-
-        val sal = findViewById<TextView>(R.id.sal_val)
-        val sTotal = (int.getStringExtra("sAdd").toDouble() + sal.toString().toDouble()).toString()
-        sal.setText("+" + sTotal)
-
-        /*To be implemented: creating different values daily for each expense/income*/
 
         //Floating button function
         val fab = findViewById<View> (R.id.fab_add)
